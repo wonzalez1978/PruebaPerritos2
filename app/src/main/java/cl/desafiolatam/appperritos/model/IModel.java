@@ -1,6 +1,6 @@
 package cl.desafiolatam.appperritos.model;
 
-interface IModel {
+public interface IModel {
     void loadBreeds();
-    void loadImages();
+    void loadImages(String breed);
 }

@@ -7,11 +7,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import cl.desafiolatam.appperritos.vista.ListaFragmtPerritos;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getSupportFragmentManager().beginTransaction().add(R.id.mainLayout,
+                ListaFragmtPerritos.newInstance(1),"lista perritos").commit();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +33,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Fragment oldFragment = getSupportFragmentManager().findFragmentByTag("details");
+        if (oldFragment == null) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().beginTransaction().add(R.id.mainLayout,
+                    ListaFragmtPerritos.newInstance(1),
+                    "listaPerritos").remove(oldFragment).commit();
+        }
+
     }
 
     @Override

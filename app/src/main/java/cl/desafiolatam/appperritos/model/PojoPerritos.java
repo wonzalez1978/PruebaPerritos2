@@ -9,7 +9,6 @@ import cl.desafiolatam.appperritos.model.api.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 class PojoPerritos implements IModel {
 
@@ -45,7 +44,7 @@ class PojoPerritos implements IModel {
     }
 
     @Override
-    public void loadImages() {
+    public void loadImages(String breed) {
 
     }
 }
