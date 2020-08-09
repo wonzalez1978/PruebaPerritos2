@@ -1,5 +1,5 @@
 package cl.desafiolatam.appperritos.presenter;
 
-interface IPresenterList {
+public interface IPresenterList {
     void loadBreeds();
 }

@@ -6,34 +6,49 @@ import java.util.Map;
 
 import cl.desafiolatam.appperritos.model.api.IPerritosDataBase;
 import cl.desafiolatam.appperritos.model.api.RetrofitClient;
+import cl.desafiolatam.appperritos.presenter.IPresenterDetails;
+import cl.desafiolatam.appperritos.presenter.IPresenterModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-class PojoPerritos implements IModel {
 
+
+public class PojoPerritos implements IModel {
+
+    IPresenterModel iPresenterModel;
+    IPresenterDetails iPresenterDetail;
+
+    public PojoPerritos(IPresenterModel iPresenterModel) {
+        this.iPresenterModel = iPresenterModel;
+    }
 
     @Override
     public void loadBreeds() {
         IPerritosDataBase servicios = RetrofitClient.getRetrofitInstance().create(IPerritosDataBase.class);
-        Call<RazasLista> razasListaCall = servicios.listaRazas();
+        Call<RazasLista> listaCall = servicios.listaRazas();
         List<String> listaPerros = new ArrayList<>();
-        razasListaCall.enqueue(new Callback<RazasLista>() {
+
+        listaCall.enqueue(new Callback<RazasLista>() {
+
+
             @Override
             public void onResponse(Call<RazasLista> call, Response<RazasLista> response) {
-                RazasLista razasLista = response.body();
-                Map<String, List<String>> mapa = (Map<String, List<String>>) razasLista.getMessage();
+                RazasLista listaRazas = response.body();
+                Map<String, List<String>> map = listaRazas.getMessage();
 
-                for (String key : mapa.keySet()) {
-                    if (mapa.get(key).isEmpty()) {
+
+                for (String key : map.keySet()) {
+                    if (map.get(key).isEmpty()) {
                         listaPerros.add(key);
                     } else {
-                        for (String subRaza : mapa.get(key)) {
+                        for (String subRaza : map.get(key)) {
                             listaPerros.add(key + " " + subRaza);
                         }
                     }
-                }
 
+                }
+                iPresenterModel.notificar(listaPerros);
             }
 
             @Override
@@ -44,7 +59,26 @@ class PojoPerritos implements IModel {
     }
 
     @Override
-    public void loadImages(String breed) {
+    public void loadImages(String raza) {
+        IPerritosDataBase servicio = RetrofitClient.getRetrofitInstance()
+                .create(IPerritosDataBase.class);
+
+        Call<RazaImagen>listCall = servicio.listaImagenes(raza);
+        List<String> listaPhotosPerros = new ArrayList<>();
+
+        listCall.enqueue(new Callback<RazaImagen>() {
+            @Override
+            public void onResponse(Call<RazaImagen> call, Response<RazaImagen> response) {
+                RazaImagen listaRazas = response.body();
+                List<String> lista = listaRazas.getMessage();
+                iPresenterDetail.loadBreedImages(raza);
+            }
+
+            @Override
+            public void onFailure(Call<RazaImagen> call, Throwable t) {
+
+            }
+        });
 
     }
 }

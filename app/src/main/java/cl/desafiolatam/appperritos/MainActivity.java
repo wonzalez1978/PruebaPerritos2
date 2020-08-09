@@ -22,17 +22,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction().add(R.id.mainLayout,
+        getSupportFragmentManager().beginTransaction().add(R.id.mainFrameLayout,
                 ListaFragmtPerritos.newInstance(1),"lista perritos").commit();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -42,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         if (oldFragment == null) {
             super.onBackPressed();
         } else {
-            getSupportFragmentManager().beginTransaction().add(R.id.mainLayout,
+            getSupportFragmentManager().beginTransaction().add(R.id.mainFrameLayout,
                     ListaFragmtPerritos.newInstance(1),
                     "listaPerritos").remove(oldFragment).commit();
         }

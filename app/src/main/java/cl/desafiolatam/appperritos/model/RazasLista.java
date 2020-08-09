@@ -1,17 +1,16 @@
 package cl.desafiolatam.appperritos.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class RazasLista {
-    private List<String> message;
     private String status;
+    private Map<String, List<String>>message;
 
-    public RazasLista(List<String> message, String status) {
-        this.message = message;
-        this.status = status;
-    }
 
-    public List<String> getMessage() {
+
+
+    public Map<String, List<String>> getMessage() {
         return message;
     }
 
@@ -19,11 +18,5 @@ public class RazasLista {
         return status;
     }
 
-    @Override
-    public String toString() {
-        return "RazasLista{" +
-                "message=" + message +
-                ", status='" + status + '\'' +
-                '}';
-    }
+
 }

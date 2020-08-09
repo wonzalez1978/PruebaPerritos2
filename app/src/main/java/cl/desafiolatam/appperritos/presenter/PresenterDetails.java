@@ -2,7 +2,7 @@ package cl.desafiolatam.appperritos.presenter;
 
 import cl.desafiolatam.appperritos.model.IModel;
 
-class PresenterDetails implements IPresenterDetails, IPresenterViewDetails {
+public class PresenterDetails implements IPresenterDetails, IPresenterViewDetails {
     IPresenterViewDetails iPresenterViewDetail;
     IModel imodel;
 

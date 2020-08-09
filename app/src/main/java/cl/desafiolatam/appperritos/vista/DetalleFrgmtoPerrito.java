@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import cl.desafiolatam.appperritos.R;
 import cl.desafiolatam.appperritos.presenter.IPresenterViewDetails;
@@ -50,12 +48,11 @@ public class DetalleFrgmtoPerrito extends Fragment implements IPresenterViewDeta
 
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+
+        return inflater.inflate(R.layout.fragmentodetalle, container, false);
     }
 
 
