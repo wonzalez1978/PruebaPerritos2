@@ -41,7 +41,7 @@ public class MiPerroRecyclerViewAdapter extends RecyclerView.Adapter<MiPerroRecy
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(null != mListener){
+                if (null != mListener) {
                     mListener.onItemClick(position);
                 }
             }

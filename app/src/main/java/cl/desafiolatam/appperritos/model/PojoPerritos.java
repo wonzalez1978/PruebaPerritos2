@@ -27,9 +27,10 @@ public class PojoPerritos implements IModel {
     public void loadBreeds() {
         IPerritosDataBase servicios = RetrofitClient.getRetrofitInstance().create(IPerritosDataBase.class);
         Call<RazasLista> listaCall = servicios.listaRazas();
+        Call<RazaImagen> razaImagen = servicios.listaImagenes("breed");
         List<String> listaPerros = new ArrayList<>();
 
-        listaCall.enqueue(new Callback<RazasLista>() {
+        listaCall.enqueue(new Callback<RazasLista>(){
 
 
             @Override
