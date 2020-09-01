@@ -1,5 +1,7 @@
 package cl.desafiolatam.appperritos.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +16,12 @@ import retrofit2.Response;
 
 
 
-public class PojoPerritos implements IModel {
+public class ModeloPerritos implements IModel {
 
     IPresenterModel iPresenterModel;
     IPresenterDetails iPresenterDetail;
 
-    public PojoPerritos(IPresenterModel iPresenterModel) {
+    public ModeloPerritos(IPresenterModel iPresenterModel) {
         this.iPresenterModel = iPresenterModel;
     }
 
@@ -72,7 +74,8 @@ public class PojoPerritos implements IModel {
             public void onResponse(Call<RazaImagen> call, Response<RazaImagen> response) {
                 RazaImagen listaRazas = response.body();
                 List<String> lista = listaRazas.getMessage();
-                iPresenterDetail.loadBreedImages(raza);
+               iPresenterModel.notificar(lista);
+                Log.d("ModeloPerrito", "recibidaImagen" + lista.get(0));
             }
 
             @Override

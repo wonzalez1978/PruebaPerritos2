@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cl.desafiolatam.appperritos.R;
-import cl.desafiolatam.appperritos.model.PojoPerritos;
+import cl.desafiolatam.appperritos.model.ModeloPerritos;
 import cl.desafiolatam.appperritos.presenter.PresenterList;
 
 public class ListaFragmtPerritos extends Fragment implements PresenterList.IPresenterViewList {
@@ -55,8 +55,9 @@ public class ListaFragmtPerritos extends Fragment implements PresenterList.IPres
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             PresenterList presentador = new PresenterList(this);
-            presentador.setImodel(new PojoPerritos(presentador));
+            presentador.setImodel(new ModeloPerritos(presentador));
             presentador.loadBreeds();
+
         }
         return view;
     }

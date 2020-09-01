@@ -1,22 +1,34 @@
 package cl.desafiolatam.appperritos.vista;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import cl.desafiolatam.appperritos.R;
-import cl.desafiolatam.appperritos.presenter.IPresenterViewDetails;
+import com.squareup.picasso.Picasso;
 
-public class DetalleFrgmtoPerrito extends Fragment implements IPresenterViewDetails {
+import java.util.List;
+
+import cl.desafiolatam.appperritos.R;
+import cl.desafiolatam.appperritos.model.ModeloPerritos;
+import cl.desafiolatam.appperritos.presenter.IPresenterDetails;
+import cl.desafiolatam.appperritos.presenter.IPresenterModel;
+import cl.desafiolatam.appperritos.presenter.IPresenterViewDetails;
+import cl.desafiolatam.appperritos.presenter.PresenterDetails;
+
+public class DetalleFrgmtoPerrito extends Fragment implements IPresenterViewDetails, IPresenterModel {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
+
+    ImageView imageView;
 
     public DetalleFrgmtoPerrito() {
     }
@@ -49,17 +61,29 @@ public class DetalleFrgmtoPerrito extends Fragment implements IPresenterViewDeta
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            Bundle savedInstanceState) {
+        View view =inflater.inflate(R.layout.fragmentodetalle, container, false);
+       PresenterDetails presentadorDetails = new PresenterDetails(this);
+       presentadorDetails.setImodel(new ModeloPerritos(this));
+       presentadorDetails.loadBreedImages(mParam1);
 
-        return inflater.inflate(R.layout.fragmentodetalle, container, false);
+        imageView = view.findViewById(R.id.img_image);
+       return view;
+    }
+    @Override
+    public void showBreedImages(String breed)
+
+
+    {
+
+
     }
 
 
-
-
     @Override
-    public void showBreedImages(String breed) {
+    public void notificar(List<String> breeds) {
+        Log.d("Detalle fragmento", " notificar"+ breeds.get(0));
 
+        Picasso.get().load(breeds.get(0)).into(imageView);
     }
 }
